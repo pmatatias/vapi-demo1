@@ -284,6 +284,7 @@ export default function VirAssistant() {
             color: isConnected ? "white" : "#010810"
           }} 
         />
+
         {isConnecting ? "Connecting..." : isConnected ? "End Call" : "Call Assistant"}
       </button>
     </div>
