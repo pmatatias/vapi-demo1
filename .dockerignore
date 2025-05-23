@@ -1,0 +1,44 @@
+# Versioning and metadata
+.git
+.gitignore
+.github
+.dockerignore
+
+# Build dependencies
+node_modules
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Environment (never include .env files in docker)
+.env
+.env.*
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Next.js build output
+.next
+out
+
+# Testing
+coverage
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yml
