@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { Bot } from "lucide-react"
 
 export default function VirAssistant() {
   const [vapi, setVapi] = useState(null)
@@ -129,32 +130,78 @@ export default function VirAssistant() {
         color: "white",
       }}
     >
-      <h1 style={{ marginBottom: "30px" }}>Virtual Voice Assistant</h1>
-
-      <div style={{ marginBottom: "20px" }}>
-        <p>Status: {status}</p>
+      <div 
+        style={{ 
+          display: "flex", 
+          alignItems: "center", 
+          marginBottom: "20px" 
+        }}
+      >
+        <Bot 
+          size={48} 
+          color="#3ef07c" 
+          strokeWidth={1.5} 
+          style={{ marginRight: "16px" }} 
+        />
+        <h1 style={{ fontSize: "32px", fontWeight: "600" }}>Virtual Voice Assistant</h1>
+      </div>
+      
+      <div 
+        style={{
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          borderRadius: "16px",
+          padding: "24px",
+          maxWidth: "500px",
+          width: "100%",
+          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+          backdropFilter: "blur(5px)",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          marginBottom: "24px"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "16px" }}>
+          <div 
+            style={{ 
+              width: "12px", 
+              height: "12px", 
+              borderRadius: "50%", 
+              backgroundColor: isConnected ? "#3ef07c" : isConnecting ? "#f0ad3e" : "#6c757d",
+              marginRight: "10px" 
+            }}
+          ></div>
+          <p style={{ fontWeight: "500" }}>Status: {status}</p>
+        </div>
 
         {isConnected && (
-          <div style={{ marginTop: "10px" }}>
-            <p>{isSpeaking ? "Assistant is speaking" : "Assistant is listening"}</p>
+          <div style={{ marginTop: "16px" }}>
+            <p style={{ 
+              marginBottom: "14px", 
+              fontWeight: "500", 
+              color: isSpeaking ? "#3ef07c" : "#f0ad3e" 
+            }}>
+              {isSpeaking ? "Assistant is speaking" : "Assistant is listening"}
+            </p>
 
-            {/* Simple volume indicator */}
+            {/* Enhanced volume indicator */}
+            <p style={{ fontSize: "14px", marginBottom: "6px", color: "rgba(255, 255, 255, 0.7)" }}>Volume Level</p>
             <div
               style={{
                 display: "flex",
-                marginTop: "10px",
                 marginBottom: "10px",
-                gap: "3px",
+                gap: "4px",
+                alignItems: "flex-end",
+                height: "30px"
               }}
             >
               {Array.from({ length: 10 }, (_, i) => (
                 <div
                   key={i}
                   style={{
-                    width: "15px",
-                    height: "15px",
-                    backgroundColor: i / 10 < volumeLevel ? "#3ef07c" : "#444",
+                    width: "20px",
+                    height: `${(i + 1) * 3}px`,
+                    backgroundColor: i / 10 < volumeLevel ? "#3ef07c" : "rgba(255, 255, 255, 0.15)",
                     borderRadius: "2px",
+                    transition: "background-color 0.2s, height 0.1s"
                   }}
                 />
               ))}
@@ -166,15 +213,17 @@ export default function VirAssistant() {
       {errorMessage && (
         <div
           style={{
-            backgroundColor: "#f03e3e",
-            padding: "15px",
-            borderRadius: "5px",
-            marginBottom: "20px",
-            maxWidth: "400px",
+            backgroundColor: "rgba(240, 62, 62, 0.8)",
+            padding: "18px",
+            borderRadius: "12px",
+            marginBottom: "24px",
+            maxWidth: "500px",
+            width: "100%",
             textAlign: "center",
+            boxShadow: "0 4px 20px rgba(240, 62, 62, 0.3)",
           }}
         >
-          <p>{errorMessage}</p>
+          <p style={{ fontWeight: "500" }}>{errorMessage}</p>
 
           {errorMessage.includes("payment") && (
             <a
@@ -183,9 +232,13 @@ export default function VirAssistant() {
               rel="noopener noreferrer"
               style={{
                 display: "inline-block",
-                marginTop: "10px",
+                marginTop: "14px",
                 color: "white",
                 textDecoration: "underline",
+                fontWeight: "500",
+                padding: "6px 12px",
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                borderRadius: "6px",
               }}
             >
               Go to Vapi Dashboard
@@ -198,17 +251,40 @@ export default function VirAssistant() {
         onClick={isConnected ? endCall : startCall}
         disabled={isConnecting || !isApiKeyValid}
         style={{
-          backgroundColor: isConnected ? "#f03e3e" : "white",
-          color: isConnected ? "white" : "black",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: isConnected ? "rgba(240, 62, 62, 0.9)" : "#3ef07c",
+          color: isConnected ? "white" : "#010810",
           border: "none",
-          borderRadius: "8px",
-          padding: "12px 24px",
+          borderRadius: "12px",
+          padding: "14px 28px",
           fontSize: "16px",
-          fontWeight: "500",
+          fontWeight: "600",
           cursor: isConnecting || !isApiKeyValid ? "not-allowed" : "pointer",
           opacity: isConnecting || !isApiKeyValid ? 0.7 : 1,
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+          transition: "all 0.2s ease",
+        }}
+        onMouseOver={(e) => {
+          if (!isConnecting && isApiKeyValid) {
+            e.currentTarget.style.transform = "translateY(-2px)";
+            e.currentTarget.style.boxShadow = "0 6px 16px rgba(0, 0, 0, 0.2)";
+          }
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "0 4px 12px rgba(0, 0, 0, 0.15)";
         }}
       >
+        <Bot 
+          size={20} 
+          style={{ 
+            marginRight: "8px",
+            color: isConnected ? "white" : "#010810"
+          }} 
+        />
+
         {isConnecting ? "Connecting..." : isConnected ? "End Call" : "Call Assistant"}
       </button>
     </div>
