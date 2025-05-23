@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 
-export default function PizzaAssistant() {
+export default function VirAssistant() {
   const [vapi, setVapi] = useState(null)
   const [status, setStatus] = useState("Ready")
   const [isConnecting, setIsConnecting] = useState(false)
@@ -129,7 +129,7 @@ export default function PizzaAssistant() {
         color: "white",
       }}
     >
-      <h1 style={{ marginBottom: "30px" }}>Pizza Voice Assistant</h1>
+      <h1 style={{ marginBottom: "30px" }}>Virtual Voice Assistant</h1>
 
       <div style={{ marginBottom: "20px" }}>
         <p>Status: {status}</p>
@@ -209,26 +209,8 @@ export default function PizzaAssistant() {
           opacity: isConnecting || !isApiKeyValid ? 0.7 : 1,
         }}
       >
-        {isConnecting ? "Connecting..." : isConnected ? "End Call" : "Call Pizza Shop"}
+        {isConnecting ? "Connecting..." : isConnected ? "End Call" : "Call Assistant"}
       </button>
-
-      <a
-        href="https://docs.vapi.ai"
-        target="_blank"
-        rel="noopener noreferrer"
-        style={{
-          position: "fixed",
-          top: "25px",
-          right: "25px",
-          padding: "5px 10px",
-          color: "#fff",
-          textDecoration: "none",
-          borderRadius: "5px",
-          boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-        }}
-      >
-        return to docs
-      </a>
     </div>
   )
 }
