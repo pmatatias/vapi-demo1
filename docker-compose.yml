@@ -16,6 +16,7 @@ services:
       - NEXT_PUBLIC_VAPI_API_KEY=${NEXT_PUBLIC_VAPI_API_KEY}
       - NEXT_PUBLIC_VAPI_ASSISTANT_ID=${NEXT_PUBLIC_VAPI_ASSISTANT_ID}
       - NODE_ENV=production
+      - HOTST=0.0.0.0
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000"]
